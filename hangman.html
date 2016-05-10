@@ -12,7 +12,9 @@
 	
 	var targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
 
-	var targetWordArray = targetWord.split("");
+	console.log(targetWord);
+
+	console.log(targetWord);
 
 	var guesses = ""; //creates empty string to store dashes and correct guesses
 
@@ -20,26 +22,28 @@
 
 	var lives = 10;
 
-	for (i=0; i < targetWord.length; i++){
-		guesses = guesses + "_"; 
+	function reset(){
+		targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
+		lives = 10;
+		guesses = "";
+		totalGuesses = [];
 	}
 
-	//need a function that checks if letter is in array
-	//must subtract a life if wrong, add a letter if correct
-
-	
-	document.querySelector('#gameContent').innerHTML = "<p>The word is... " + //not showing up
-		guesses +
-		"<p>You've guessed... " +
-		totalGuesses +
-		"<p>You have: " +
-		lives + " left.";
-
 	document.onkeyup = function(event){
-
 		var letter = String.fromCharCode(event.keyCode).toLowerCase();
+		if (letter == targetWord[i]){
+			//code to replace dash with letter
+		}else{
+			lives--;
+		}
 
-		//
+		if(lives == 0){
+			alert("You've run out of lives! Please try again");
+			reset();
+			}
+		}
+
+	//function for when lives = 0 reset game
 
 	</script>
 
