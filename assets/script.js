@@ -4,6 +4,8 @@
 
 	var wordBank = ["cersei", "tyrion", "winterfell", "needle", "whitewalkers", "direwolf", "targaryen", "daenerys", 
 	"ygrette", "arya", "andal", "kingsgaurd", "lannisport", "dragonstone", "riverrun", "highgarden"];
+
+	var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 	
 	var targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
 
@@ -16,10 +18,6 @@
 	var wins = 0;
 
 	var losses = 0;
-
-	var audio = new Audio("assets/gotsound.mp3");
-
-	audio.play();
 
 	//for loop to create empty dashes for word
 
@@ -68,6 +66,16 @@
 		return false;
 	}
 
+	//this makes sure user only guesses alphabetical letters
+
+	function checkAlphabet(letter, arr){
+		for (var i = 0; i < arr.length; i++)
+			if (letter == arr[i]){
+				return true;
+			}
+		return false;
+	}
+
 	//set up variables to show stats later
 
 	var showCurrentWord = document.getElementById("currentWord");
@@ -94,24 +102,31 @@
 		var pos = targetWord.indexOf(letter);
 
 		//if index.Of returns -1, we know letter is not in word
-		if (pos == -1 && !duplicateGuess(letter, totalGuesses)){
+		if (!checkAlphabet(letter, alphabet)){
+			alert("Please choose a letter between A and Z.")
+		}
+
+		if (pos == -1 && !duplicateGuess(letter, totalGuesses) && checkAlphabet(letter, alphabet)){
 			lives--;
 			showLives.innerHTML = lives;
 			totalGuesses.push(letter);
 			showGuesses.innerHTML = totalGuesses.join(", ");
 			}
+
 		else{
 			checkArray(arrWord, letter, targetWord);
 			showCurrentWord.innerHTML = arrWord.join(" ");
 		}
 
 		if(arrWord.indexOf("_") === -1){
-			alert("Congratulations! You've saved Winterfell!");
+			alert("Well done, next stop is King's Landing.");
+			var audio = new Audio("assets/gotsound.mp3");
+			audio.play();
 			wins++;
 			showWins.innerHTML = wins;
 			reset();
-		}	
-			
+		}
+
 		if(lives == 0){
 			alert("You've run out of lives - Winter is coming! Press any key to start over and try again!");
 			losses++;
