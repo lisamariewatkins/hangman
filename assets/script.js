@@ -2,17 +2,22 @@
 
 	//set up global variables
 
-	var wordBank = ["cersei", "tyrion", "winterfell", "needle", "whitewalkers", "direwolf", "targaryen", "daenerys"];
+	var wordBank = ["cersei", "tyrion", "winterfell", "needle", "whitewalkers", "direwolf", "targaryen", "daenerys", 
+	"ygrette", "arya", "andal", "kingsgaurd", "lannisport", "dragonstone", "riverrun", "highgarden"];
 	
 	var targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
 
 	var totalGuesses = []; //creates empty array to track user guesses
 
-	var lives = 10; 
+	var lives = 5; 
 
 	var arrWord = []; //creates empty array for secret word
 
 	var wins = 0;
+
+	var audio = new Audio("assets/gotsound.mp3");
+
+	audio.play();
 
 	//for loop to create empty dashes for word
 
@@ -28,12 +33,13 @@
 		for(var i = 0; i < targetWord.length; i++ ){
 		arrWord.push("_");
 		}
-		lives = 10;
+		lives = 5;
 		guesses = "";
 		totalGuesses = [];
 		showGuesses.innerHTML = totalGuesses.join(", ");
 		showCurrentWord.innerHTML = arrWord.join(" ")
 		showLives.innerHTML = lives;
+		audio.play();
 	}
 
 	//check array function to call on later
