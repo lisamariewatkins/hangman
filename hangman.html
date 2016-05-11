@@ -6,53 +6,12 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
-	<script type="text/javascript">
-
-	var wordBank = ["cats", "dogs"];
-	
-	var targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
-
-	console.log(targetWord);
-
-	console.log(targetWord);
-
-	var guesses = ""; //creates empty string to store dashes and correct guesses
-
-	var totalGuesses = [];
-
-	var lives = 10;
-
-	function reset(){
-		targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
-		lives = 10;
-		guesses = "";
-		totalGuesses = [];
-	}
-
-	document.onkeyup = function(event){
-		var letter = String.fromCharCode(event.keyCode).toLowerCase();
-		if (letter == targetWord[i]){
-			//code to replace dash with letter
-		}else{
-			lives--;
-		}
-
-		if(lives == 0){
-			alert("You've run out of lives! Please try again");
-			reset();
-			}
-		}
-
-	//function for when lives = 0 reset game
-
-	</script>
-
 
 	<header>
-		<h1>Famous Poets</h1> <em><h3>hangman game</h3></em></h3>
+		Game of Thrones Hangman Game
 	</header>
 	<div class="row">
-		<div class = "col-md-12" id="welcome">Welcome to my simple Javascript game inspired by famous poets.  Press any letter on your keyboard to get started.</div>
+		<div class = "col-md-12" id="welcome">Text about Game of Thrones.</div>
 	</div>
 	<div class="row" id="gameContent">
 		<div class = "col-md-4">
@@ -71,6 +30,75 @@
 			<p id="pastGuesses"></p>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+
+	//set up global variables
+
+	var wordBank = ["cersei", "tyrion", "winterfell", "needle"];
+	
+	var targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
+
+	var totalGuesses = []; //creates empty array to track user guesses
+
+	var lives = 10; 
+
+	var arrWord = []; //creates empty array so user can begin to guess
+
+	//for loop to create empty dashes for word
+
+	for(var i = 0; i < targetWord.length; i++ ){
+	arrWord.push("_");
+	}
+
+	//reset function to call on later
+		
+	function reset(){
+		targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
+		lives = 10;
+		guesses = "";
+		totalGuesses = [];
+	}
+
+	//set up variables to show stats later
+
+	document.getElementById("currentWord").innerHTML = arrWord.join(" ");
+
+	document.getElementById("livesLeft").innerHTML = lives;
+
+	var showGuesses = document.getElementById("pastGuesses")
+
+	//now when user presses a key...
+
+	document.onkeyup = function(event){
+
+		var letter = String.fromCharCode(event.keyCode).toLowerCase();
+			
+		var pos = targetWord.indexOf(letter);
+
+		//if index.Of returns -1, we know letter is not in word
+		if (pos == -1){
+			lives--;
+			document.getElementById("livesLeft").innerHTML = lives;
+			showGuesses.innerHTML = totalGuesses.push(letter.join(", "));
+		}
+		else{
+			arrWord.splice(pos, 1, letter);
+			console.log(arrWord);
+			document.getElementById("currentWord").innerHTML = arrWord.join(" ")
+		}	//add correct letter to correct place
+			
+			
+			//code to replace dash with letter
+		
+		if(lives == 0){
+			alert("You've run out of lives! Press any key to start over and try again!");
+			reset();
+			}
+		}
+
+	</script>
+
 
 </body>
 </html>
