@@ -119,7 +119,7 @@
 		}
 
 		if(arrWord.indexOf("_") === -1){
-			alert("Well done, next stop is King's Landing.");
+			alert("The iron throne is yours... for now.");
 			var audio = new Audio("assets/gotsound.mp3");
 			audio.play();
 			wins++;
@@ -128,7 +128,7 @@
 		}
 
 		if(lives == 0){
-			alert("You've run out of lives - Winter is coming! Press any key to start over and try again!");
+			alert("You know nothing, Jon Snow!");
 			losses++;
 			reset();
 			}
