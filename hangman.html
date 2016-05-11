@@ -2,32 +2,44 @@
 <html>
 <head>
 	<title></title>
+	<link href="reset.css" type="text/css" rel="stylesheet">
+
 	<link rel="stylesheet" type="text/css" href="hangman.css">
+
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 	<header>
-		Game of Thrones Hangman Game
+		<img src="gotlogo.jpg">
+		<br>
+		<strong>Game of Thrones Hangman Game</strong>
 	</header>
-	<div class="row">
-		<div class = "col-md-12" id="welcome">Text about Game of Thrones.</div>
+	<div class="row" id="quotebox">
+		<div class = "col-md-12" id="quote"><em>When you play the game of thrones, you win or you die.</em></div>
 	</div>
 	<div class="row" id="gameContent">
-		<div class = "col-md-4">
+		<div class = "col-md-3">
 			<strong>The word is...</strong>
 			<br><br>
 			<p id="currentWord"></p>
 		</div>
-		<div class = "col-md-4">
+		<div class = "col-md-3">
 			<strong>Lives left:</strong>
 			<br><br>
 			<p id="livesLeft"></p>
 		</div>
-		<div class = "col-md-4">
+		<div class = "col-md-3">
 			<strong>Past guesses:</strong>
 			<br><br>
 			<p id="pastGuesses"></p>
+		</div>
+		<div class = "col-md-3">
+			<Strong>Total wins:</Strong>
+			<br><br>
+			<p id="totalWins"></p>
 		</div>
 	</div>
 
@@ -45,6 +57,8 @@
 
 	var arrWord = []; //creates empty array so user can begin to guess
 
+	var wins = 0;
+
 	//for loop to create empty dashes for word
 
 	for(var i = 0; i < targetWord.length; i++ ){
@@ -55,18 +69,40 @@
 		
 	function reset(){
 		targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
+		arrWord = [];
+		for(var i = 0; i < targetWord.length; i++ ){
+		arrWord.push("_");
+		}
 		lives = 10;
 		guesses = "";
 		totalGuesses = [];
 	}
 
+	//check array function to call on later
+
+	function checkArray(arr, letter, word){ 
+		for (var i=0; i < arr.length; i++){
+			if (letter == word[i]){
+				arr.splice(i, 1, letter);
+			}
+		}
+		console.log(arrWord);
+	}
+
 	//set up variables to show stats later
 
-	document.getElementById("currentWord").innerHTML = arrWord.join(" ");
+	var showCurrentWord = document.getElementById("currentWord");
 
-	document.getElementById("livesLeft").innerHTML = lives;
+	var showLives = document.getElementById("livesLeft");
 
-	var showGuesses = document.getElementById("pastGuesses")
+	var showGuesses = document.getElementById("pastGuesses");
+
+	var showWins = document.getElementById("totalWins");
+
+	//set up display of lives/word BEFORE user starts playing
+
+	showLives.innerHTML = lives;
+	showCurrentWord.innerHTML = arrWord.join(" ")
 
 	//now when user presses a key...
 
@@ -79,20 +115,24 @@
 		//if index.Of returns -1, we know letter is not in word
 		if (pos == -1){
 			lives--;
-			document.getElementById("livesLeft").innerHTML = lives;
-			showGuesses.innerHTML = totalGuesses.push(letter.join(", "));
+			showLives.innerHTML = lives;
+			totalGuesses.push(letter)
+			showGuesses.innerHTML = totalGuesses.join(", ");
 		}
 		else{
-			arrWord.splice(pos, 1, letter);
-			console.log(arrWord);
-			document.getElementById("currentWord").innerHTML = arrWord.join(" ")
-		}	//add correct letter to correct place
+			checkArray(arrWord, letter, targetWord);
+			showCurrentWord.innerHTML = arrWord.join(" ")
+		}
+
+		if(arrWord.indexOf("_") === -1){
+			alert("Congratulations! You've saved Winterfell!");
+			wins++;
+			showWins.innerHTML = wins;
+			reset();
+		}	
 			
-			
-			//code to replace dash with letter
-		
 		if(lives == 0){
-			alert("You've run out of lives! Press any key to start over and try again!");
+			alert("You've run out of lives - Winter is coming! Press any key to start over and try again!");
 			reset();
 			}
 		}

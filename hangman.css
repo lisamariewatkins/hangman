@@ -1,13 +1,39 @@
-header{
+body{
 	text-align: center;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	background: url(bg.jpg) no-repeat center center fixed;
+
 }
 
-#welcome{
-	text-align: center;
-	padding: 20px;
+header{
+	width: 80%;
+	margin: auto;
+	background-color: #000000;
+	color: #A61919;
+	font-size: 2em;
+	font-family: 'Shadows Into Light', cursive;
+}
+
+#quotebox{
+	width: 80%;
+	margin: auto;
+	padding-top: 25px;
+	padding-bottom: 50px;
+	background-color: #000000;
+	color: #c0c0c0;
+	font-family: 'Shadows Into Light', cursive;
+	font-size: 1.125em;
 }
 
 #gameContent{
-	text-align: center;
-	padding: 20px;
+	width: 80%;
+	margin: auto;
+	background-color: #000000;
+	color: #c0c0c0;
+	padding-bottom: 50px;
+	font-family: 'Shadows Into Light', cursive;
+	font-size: 1.45em;
 }
