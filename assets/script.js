@@ -15,6 +15,8 @@
 
 	var wins = 0;
 
+	var losses = 0;
+
 	var audio = new Audio("assets/gotsound.mp3");
 
 	audio.play();
@@ -39,6 +41,7 @@
 		showGuesses.innerHTML = totalGuesses.join(", ");
 		showCurrentWord.innerHTML = arrWord.join(" ")
 		showLives.innerHTML = lives;
+		showLosses.innerHTML = losses;
 		audio.play();
 	}
 
@@ -75,6 +78,8 @@
 
 	var showWins = document.getElementById("totalWins");
 
+	var showLosses = document.getElementById("totalLosses");
+
 	//set up display of lives/word BEFORE user starts playing
 
 	showLives.innerHTML = lives;
@@ -109,6 +114,7 @@
 			
 		if(lives == 0){
 			alert("You've run out of lives - Winter is coming! Press any key to start over and try again!");
+			losses++;
 			reset();
 			}
 		}
