@@ -18,7 +18,7 @@ var losses = 0;
 //for loop to create empty dashes for word
 
 for(var i = 0; i < targetWord.length; i++ ){
-arrWord.push("_");
+	arrWord.push("_");
 }
 
 //reset function to call on later
@@ -27,7 +27,7 @@ function reset(){
 	targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
 	arrWord = [];
 	for(var i = 0; i < targetWord.length; i++ ){
-	arrWord.push("_");
+		arrWord.push("_");
 	}
 	lives = 5;
 	guesses = "";
