@@ -47,7 +47,7 @@
 
 	//set up global variables
 
-	var wordBank = ["cersei", "tyrion", "winterfell", "needle"];
+	var wordBank = ["cersei", "tyrion", "winterfell", "needle", "whitewalkers"];
 	
 	var targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
 
@@ -76,6 +76,9 @@
 		lives = 10;
 		guesses = "";
 		totalGuesses = [];
+		showGuesses.innerHTML = totalGuesses.join(", ");
+		showCurrentWord.innerHTML = arrWord.join(" ")
+		showLives.innerHTML = lives;
 	}
 
 	//check array function to call on later
