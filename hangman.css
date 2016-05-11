@@ -12,20 +12,21 @@ header{
 	width: 80%;
 	margin: auto;
 	background-color: #000000;
-	color: #A61919;
+	color: #c1cdcd;
 	font-size: 2em;
-	font-family: 'Shadows Into Light', cursive;
+	font-family: 'Amatic SC', cursive;
+	letter-spacing: 7px;
 }
 
 #quotebox{
 	width: 80%;
 	margin: auto;
-	padding-top: 25px;
-	padding-bottom: 50px;
+	padding-top: 50px;
+	padding-bottom: 75px;
 	background-color: #000000;
-	color: #c0c0c0;
-	font-family: 'Shadows Into Light', cursive;
-	font-size: 1.125em;
+	color: #A61919;
+	font-family: 'Tangerine', cursive;
+	font-size: 2.75em;
 }
 
 #gameContent{

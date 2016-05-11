@@ -9,16 +9,19 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
 	<link href='https://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Amatic+SC' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 	<header>
 		<img src="gotlogo.jpg">
 		<br>
-		<strong>Game of Thrones Hangman Game</strong>
+		<strong>Hangman Game</strong>
 	</header>
 	<div class="row" id="quotebox">
-		<div class = "col-md-12" id="quote"><em>When you play the game of thrones, you win or you die.</em></div>
+		<div class = "col-md-12" id="quote"><strong><P>When you play the game of thrones, you win... or you die.</strong></P>
+		</div>
 	</div>
 	<div class="row" id="gameContent">
 		<div class = "col-md-3">
@@ -47,7 +50,7 @@
 
 	//set up global variables
 
-	var wordBank = ["cersei", "tyrion", "winterfell", "needle", "whitewalkers"];
+	var wordBank = ["cersei", "tyrion", "winterfell", "needle", "whitewalkers", "direwolf", "targaryen", "daenerys"];
 	
 	var targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
 
@@ -55,7 +58,7 @@
 
 	var lives = 10; 
 
-	var arrWord = []; //creates empty array so user can begin to guess
+	var arrWord = []; //creates empty array for secret word
 
 	var wins = 0;
 
@@ -92,6 +95,18 @@
 		console.log(arrWord);
 	}
 
+	//function to forgive for duplicate guess 
+
+	function duplicateGuess(letter, arr){
+		for (var i = 0; i < arr.length; i++){
+			if (letter == arr[i]){
+				alert("You've already delt this hand. Try again.");
+				return true;
+			}
+		}
+		return false;
+	}
+
 	//set up variables to show stats later
 
 	var showCurrentWord = document.getElementById("currentWord");
@@ -116,15 +131,15 @@
 		var pos = targetWord.indexOf(letter);
 
 		//if index.Of returns -1, we know letter is not in word
-		if (pos == -1){
+		if (pos == -1 && !duplicateGuess(letter, totalGuesses)){
 			lives--;
 			showLives.innerHTML = lives;
-			totalGuesses.push(letter)
+			totalGuesses.push(letter);
 			showGuesses.innerHTML = totalGuesses.join(", ");
-		}
+			}
 		else{
 			checkArray(arrWord, letter, targetWord);
-			showCurrentWord.innerHTML = arrWord.join(" ")
+			showCurrentWord.innerHTML = arrWord.join(" ");
 		}
 
 		if(arrWord.indexOf("_") === -1){
