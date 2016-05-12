@@ -1,9 +1,22 @@
-var wordBank = ["cersei", "tyrion", "winterfell", "needle", "whitewalkers", "direwolf", "targaryen", "daenerys", 
-	"ygrette", "arya", "andal", "kingsgaurd", "lannisport", "dragonstone", "riverrun", "highgarden"];
+var wordBank = [{word: "cersei", hint: "Queen Regent of the Seven Kingdoms, she loves nothing more than her children."},
+	{word: "tyrion", hint: "What he lacks in height, he makes up for in intelligence."},
+	{word: "winterfell", hint: "The current seat of house Bolton."},
+	{word: "needle", hint: "Arya Stark's most beloved possession."},
+	{word: "whitewalkers", hint: "Only killed by Dragonstone."},
+	{word: "direwolf", hint: "One for each Stark child..."},
+	{word: "daenerys", hint: "Mother of Dragons."},
+	{word: "ygrette", hint: "You know nothing, Jon Snow."},
+	{word: "lannisport", hint: "Walled city in the westerlands."},
+	{word: "riverrun", hint: "Home of Catelyn Stark."},
+	{word: "highgarden", hint: "Seat of House Tyrell"}]
 
-var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-	
-var targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
+var alphabet = /^[a-zA-Z]+$/
+
+var targetObject = wordBank[Math.floor(Math.random()*wordBank.length)];
+
+var targetWord = targetObject.word
+
+var targetHint = targetObject.hint
 
 var totalGuesses = []; //creates empty array to track user guesses
 
@@ -24,7 +37,9 @@ for(var i = 0; i < targetWord.length; i++ ){
 //reset function to call on later
 		
 function reset(){
-	targetWord = wordBank[Math.floor(Math.random()*wordBank.length)];
+	targetObject = wordBank[Math.floor(Math.random()*wordBank.length)];
+	targetWord = targetObject.word
+	targetHint = targetObject.hint 
 	arrWord = [];
 	for(var i = 0; i < targetWord.length; i++ ){
 		arrWord.push("_");
@@ -46,7 +61,6 @@ function checkArray(arr, letter, word){
 			arr.splice(i, 1, letter);
 		}
 	}
-	console.log(arrWord);
 }
 
 //function to forgive for duplicate guess 
@@ -58,16 +72,6 @@ function duplicateGuess(letter, arr){
 			return true;
 		}
 	}
-	return false;
-}
-
-//this makes sure user only guesses alphabetical letters
-
-function checkAlphabet(letter, arr){
-	for (var i = 0; i < arr.length; i++)
-		if (letter == arr[i]){
-			return true;
-		}
 	return false;
 }
 
@@ -83,10 +87,15 @@ var showWins = document.getElementById("totalWins");
 
 var showLosses = document.getElementById("totalLosses");
 
+var showCurrentHint = document.getElementById("currentHint");
+
 //set up display of lives/word BEFORE user starts playing
 
 showLives.innerHTML = lives;
-showCurrentWord.innerHTML = arrWord.join(" ")
+showCurrentWord.innerHTML = arrWord.join(" ");
+showCurrentHint.innerHTML = targetHint;
+
+//set up hints for each variable
 
 //now when user presses a key...
 
@@ -96,12 +105,14 @@ document.onkeyup = function(event){
 		
 	var pos = targetWord.indexOf(letter);
 
+	var alphabetTest = alphabet.test(letter);
+
 	//if index.Of returns -1, we know letter is not in word
-	if (!checkAlphabet(letter, alphabet)){
+	if (!alphabetTest){
 		alert("Please choose a letter between A and Z.")
 	}
 
-	if (pos == -1 && !duplicateGuess(letter, totalGuesses) && checkAlphabet(letter, alphabet)){
+	if (pos == -1 && !duplicateGuess(letter, totalGuesses) && alphabetTest){
 		lives--;
 		showLives.innerHTML = lives;
 		totalGuesses.push(letter);

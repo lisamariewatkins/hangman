@@ -46,6 +46,18 @@ header{
 	border-left: solid #800000 5px;
 }
 
+#hintContent{
+	background-color: #000000;
+	font-family: 'Shadows Into Light', cursive;
+	font-size: 1.45em;
+	color: #c0c0c0;
+	width: 80%;
+	margin: auto;
+	border-right: solid #800000 5px;
+	border-left: solid #800000 5px;
+	padding-bottom: 50px;
+}
+
 #gameContent{
 	width: 80%;
 	margin: auto;
