@@ -2,7 +2,7 @@ var wordBank = [{word: "cersei", hint: "Queen Regent of the Seven Kingdoms, she 
 	{word: "tyrion", hint: "What he lacks in height, he makes up for in intelligence."},
 	{word: "winterfell", hint: "The current seat of house Bolton."},
 	{word: "needle", hint: "Arya Stark's most beloved possession."},
-	{word: "whitewalkers", hint: "Only killed by Dragonstone."},
+	{word: "whitewalkers", hint: "Killed only by Dragonstone."},
 	{word: "direwolf", hint: "One for each Stark child..."},
 	{word: "daenerys", hint: "Mother of Dragons."},
 	{word: "ygrette", hint: "You know nothing, Jon Snow."},
