@@ -51,6 +51,7 @@ function reset(){
 	showCurrentWord.innerHTML = arrWord.join(" ")
 	showLives.innerHTML = lives;
 	showLosses.innerHTML = losses;
+	showCurrentHint.innerHTML = targetHint;
 }
 
 //check array function to call on later
