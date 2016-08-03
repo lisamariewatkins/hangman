@@ -1,22 +1,40 @@
-var wordBank = [{word: "cersei", hint: "Queen Regent of the Seven Kingdoms, she loves nothing more than her children."},
-	{word: "tyrion", hint: "What he lacks in height, he makes up for in intelligence."},
-	{word: "winterfell", hint: "The current seat of house Bolton."},
-	{word: "needle", hint: "Arya Stark's most beloved possession."},
-	{word: "whitewalkers", hint: "Killed only by Dragonstone."},
-	{word: "direwolf", hint: "One for each Stark child..."},
-	{word: "daenerys", hint: "Mother of Dragons."},
-	{word: "ygrette", hint: "You know nothing, Jon Snow."},
-	{word: "lannisport", hint: "Walled city in the westerlands."},
-	{word: "riverrun", hint: "Home of Catelyn Stark."},
-	{word: "highgarden", hint: "Seat of House Tyrell"}]
+function Word (word,hint){
+	this.word = word,
+	this.hint = hint
+}
 
-var alphabet = /^[a-zA-Z]+$/
+var cersei = new Word("cersei","Queen Regent of the Seven Kingdoms, she loves nothing more than her children.");
+
+var tyrion = new Word("tyrion", "What he lacks in height, he makes up for in intelligence.");
+
+var winterfell = new Word("winterfell", "The current seat of house Bolton.");
+
+var needle = new Word("needle", "Arya Stark's most beloved possession.");
+
+var whitewalkers = new Word("whitewalkers", "Killed only by Dragonglass.");
+
+var direwolf = new Word("direwolf", "One for each Stark child...");
+
+var daenerys = new Word("daenerys", "Mother of Dragons.");
+
+var ygrette = new Word("ygrette", "You know nothing, Jon Snow.");
+
+var lannisport = new Word("lannisport", "Walled city in the westerlands.");
+
+var riverrun = new Word("riverrun", "Home of Catelyn Stark.");
+
+var highgarden = new Word("highgarden", "Seat of House Tyrell");
+
+
+var wordBank = [cersei, tyrion, winterfell, needle, whitewalkers, direwolf, daenerys, ygrette, lannisport, riverrun, highgarden];
+
+var alphabet = /^[a-zA-Z]+$/;
 
 var targetObject = wordBank[Math.floor(Math.random()*wordBank.length)];
 
-var targetWord = targetObject.word
+var targetWord = targetObject.word;
 
-var targetHint = targetObject.hint
+var targetHint = targetObject.hint;
 
 var totalGuesses = []; //creates empty array to track user guesses
 
